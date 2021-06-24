@@ -15,11 +15,15 @@ let care = new Care(foodScreen, sleepZ, heart);
 let foodButton = new Button(420, 10, 130, 50);
 let foodValue = false;
 let exitButton = new Button(400, 400, 20, 20);
-let pizzaButton = new Button(100, 100, 50, 50);
+//let pizzaButton = new Button(100, 100, 50, 50);
 
 //Sleep
+let sleepButton = new Button(420, 65, 130, 50);
+let sleepValue = false;
 
 //Pat
+let patButton = new Button(420, 120, 130, 50);
+let patValue = false;
 
 //Characters
 let CinnaPic = loadImage('assets/Cinnamoroll.png');
@@ -38,10 +42,18 @@ function mouseClicked() {
       foodValue = false;
       console.log("bye!");
    }
+   if (sleepButton.hitTest()) {
+      sleepValue = true;
+   }
+   if (patButton.hitTest()) {
+      patValue = true;
+   }
 }
 
 function draw() {
    image(Background1, 0, 0);
+  
+   //if(start.start == true) {
    Cinnamoroll.display();
    image(Buttons, 420, 10);
    text("FOOD", 465, 40);
@@ -55,6 +67,15 @@ function draw() {
       rect(400, 400, 20, 20);
       rect(100, 100, 50, 50);
    }
+
+  /* if (sleepValue == true) {
+      care.sleep();
+   }
+
+   if (patValue == true) {
+      care.pat();
+   }
+}*/
 
 }
 

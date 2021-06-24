@@ -5,10 +5,13 @@ export default class Care {
         this.foodDisplay = foodDisplay;
         this.sleepEmote = sleepEmote;
         this.loveEmote = loveEmote;
+        this.hunger = 80;
+        this.energy = 80;
+        this.love = 80;
     }
 
     food() {
-        image(this.foodDisplay, 20, 0);
+        image(this.foodDisplay, 20, 400);
     }
 
     sleep() {
