@@ -11,7 +11,7 @@ export default class Care {
     }
 
     food() {
-        image(this.foodDisplay, 20, 400);
+        image(this.foodDisplay, 40, 400);
     }
 
     sleep() {

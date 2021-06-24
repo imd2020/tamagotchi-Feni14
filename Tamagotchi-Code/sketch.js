@@ -14,8 +14,9 @@ let care = new Care(foodScreen, sleepZ, heart);
 //Food
 let foodButton = new Button(420, 10, 130, 50);
 let foodValue = false;
-let exitButton = new Button(400, 400, 20, 20);
-//let pizzaButton = new Button(100, 100, 50, 50);
+let pizzaButton = new Button(100, 425, 80, 80);
+let cupcakeButton = new Button(220, 425, 80, 80);
+let sushiButton = new Button(380, 425, 80, 80);
 
 //Sleep
 let sleepButton = new Button(420, 65, 130, 50);
@@ -38,10 +39,18 @@ function mouseClicked() {
    if (foodButton.hitTest()) {
       foodValue = true;
    }
-   if (exitButton.hitTest()) {
+   if (pizzaButton.hitTest()) {
       foodValue = false;
-      console.log("bye!");
+      console.log("Pizza!");
    }
+   if (cupcakeButton.hitTest()) {
+         foodValue = false;
+         console.log("Cupcake!");
+   }
+   if (sushiButton.hitTest()) {
+      foodValue = false;
+      console.log("Sushi!");
+}
    if (sleepButton.hitTest()) {
       sleepValue = true;
    }
@@ -63,10 +72,9 @@ function draw() {
 
    if (foodValue == true) {
       care.food();
-
-      rect(400, 400, 20, 20);
-      rect(100, 100, 50, 50);
    }
+
+
 
   /* if (sleepValue == true) {
       care.sleep();
@@ -77,6 +85,8 @@ function draw() {
    }
 }*/
 
+
 }
 
-
+window.draw = draw;
+window.mouseClicked = mouseClicked;
