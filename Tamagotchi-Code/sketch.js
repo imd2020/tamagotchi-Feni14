@@ -36,18 +36,39 @@ let patValue = false;
 let CinnaPic = loadImage('assets/Cinnamoroll.png');
 let KuroPic = loadImage('assets/Kuromi.png');
 let MeloPic = loadImage('assets/MyMelody.png');
-let Cinnamoroll = new Character(CinnaPic);
-let Kuromi = new Character(KuroPic);
-let MyMelody = new Character(MeloPic);
+let kuroButton = new Button(10, 120, 210, 210);
+let cinnaButton = new Button(130, 370, 290, 140);
+let meloButton = new Button(360, 120, 180, 210);
+let chosenOne;
+let test = new Character();
+
+
+
 
 
 function mouseClicked() {
    if (startButton.hitTest() && state == "start"){
       state = "characterChoice";
-   }
+   } else if (state == "characterChoice") {
+      if (kuroButton.hitTest()) {
+         chosenOne = KuroPic;
+         state = "game";
+      }
+      if (cinnaButton.hitTest()) {
+         chosenOne = CinnaPic;
+         state = "game";
+      }
+      if (meloButton.hitTest()) {
+         chosenOne = MeloPic;
+         state = "game";
+      }
+      }
+   
+
    if (foodButton.hitTest()) {
       foodValue = true;
    }
+   if (foodValue == true) {
    if (pizzaButton.hitTest()) {
       foodValue = false;
       console.log("Pizza!");
@@ -63,6 +84,7 @@ function mouseClicked() {
       console.log("Sushi!");
       eating = true;
 }
+   }
    if (sleepButton.hitTest()) {
       sleepValue = true;
    }
@@ -70,6 +92,8 @@ function mouseClicked() {
       patValue = true;
    }
 }
+
+
 
 function draw() {
    image(Background1, 0, 0);
@@ -79,8 +103,14 @@ function draw() {
       textSize(30);
       text("START", 230, 345);
    }
-  else if (state = "characterChoice") {
-   Cinnamoroll.display();
+  else if (state == "characterChoice") {
+     text("Choose your character!", 130, 70);
+      image(KuroPic, 10, 120);
+      image(CinnaPic, 130, 370);
+      image(MeloPic, 360, 120);
+  }
+  else if (state == "game") {
+   image(chosenOne, 130, 200);
    image(Buttons, 420, 10);
    textSize(14);
    text("FOOD", 465, 40);

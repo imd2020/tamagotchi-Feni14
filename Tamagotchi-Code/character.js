@@ -1,3 +1,5 @@
+
+
 export default class Character {
     constructor(sanrioCharacter) {
         this.sanrioCharacter = sanrioCharacter;
