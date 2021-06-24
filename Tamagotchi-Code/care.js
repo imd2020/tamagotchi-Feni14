@@ -1,15 +1,17 @@
 import Button from "./button.js";
 
 export default class Care {
-    constructor(foodDisplay, sleepEmote, loveEmote) {
+    constructor(foodDisplay, sleepEmote, loveEmote, box) {
         this.foodDisplay = foodDisplay;
         this.sleepEmote = sleepEmote;
         this.loveEmote = loveEmote;
+        this.box = box;
         this.foodValue = false;
         this.sleepValue = false;
         this.hunger = 80;
         this.energy = 80;
         this.love = 80;
+        this.levelScore = 0;
     }
 
     stats() {
@@ -29,5 +31,13 @@ export default class Care {
 
     pat() {
         image(this.loveEmote, 90, 120);
+    }
+
+    textBox() {
+        image(this.box, 40, 400);
+    }
+
+    level() {
+        //maybe ne Textbox?
     }
 }
