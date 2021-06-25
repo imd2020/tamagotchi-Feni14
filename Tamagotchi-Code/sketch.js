@@ -14,6 +14,9 @@ let startButton = new Button(150, 350, 260, 70);
 let restartButton = new Button(150, 350, 260, 70);
 let care = new Care(foodScreen, nom, sleepZ, heart, textBox);
 let loop = 0;
+let levelUp = false;
+let leveling = 0;
+let level = 1;
 let state = "start";
 let x;
 let y;
@@ -96,21 +99,21 @@ function mouseClicked() {
       console.log("Pizza!");
       eating = true;
       care.hunger = care.hunger + 10;
-      care.level = care.level + 1;
+      care.levelScore = care.levelScore + 1;
       }
    if (cupcakeButton.hitTest()) {
          care.foodValue = false;
          console.log("Cupcake!");
          eating = true;
          care.hunger = care.hunger + 10;
-         care.level = care.level + 1;
+         care.levelScore = care.levelScore + 1;
       }
    if (sushiButton.hitTest()) {
       care.foodValue = false;
       console.log("Sushi!");
       eating = true;
       care.hunger = care.hunger + 10;
-      care.level = care.level + 1;
+      care.levelScore = care.levelScore + 1;
       }
    }
 
@@ -120,7 +123,7 @@ function mouseClicked() {
       care.energy = care.energy + 10;
       nap = true;
       hyped = false;
-      care.level = care.level + 1;
+      care.levelScore = care.levelScore + 1;
       }
    } else if (care.energy > 90 && sleepButton.hitTest()) {hyped = true;}
 
@@ -130,9 +133,13 @@ function mouseClicked() {
       care.love = care.love + 10;
       patting = true;
       annoyed = false;
-      care.level = care.level + 1;
+      care.levelScore = care.levelScore + 1;
       }
    } else if (care.love > 90 && patButton.hitTest()) {annoyed = true;}
+
+   if (levelScore == 10 * level) {
+      level = level + 1;
+   }
 }
 
 
@@ -315,9 +322,24 @@ function draw() {
    }
 
    //level
-   if (care.level == 10){
-      care.level();
+   if (care.levelScore == 10 * level){
+      levelUp = true;
    }
+   if (levelUp == true) {
+      leveling = leveling + 1;
+   }
+   if (leveling >= 30){
+      leveling = 0;
+      levelUp = false;
+   }
+
+   if(leveling >= 1){
+      textAlign(CENTER);
+      textSize(20);
+      text("Yay! You reached Level " + level + "!", 180, 20, 200);
+   }
+
+   
 
 }
    //End screen

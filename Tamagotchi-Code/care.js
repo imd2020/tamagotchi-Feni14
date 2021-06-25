@@ -39,8 +39,4 @@ export default class Care {
     textBox() {
         image(this.box, 40, 400);
     }
-
-    level() {
-        //maybe ne Textbox?
-    }
 }
