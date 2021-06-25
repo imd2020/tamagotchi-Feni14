@@ -5,22 +5,27 @@ let Background1 = loadImage('assets/heart-background.png');
 let startPic = loadImage('assets/start-button.png');
 let textBox = loadImage('assets/text-box.png');
 let Buttons = loadImage('assets/buttons.png');
-let sleepZ = loadImage('assets/sleep.png');
 let foodScreen = loadImage('assets/food-screen.png');
+let nom = loadImage('assets/nom.png');
+let sleepZ = loadImage('assets/sleep.png');
 let heart = loadImage('assets/heart.png');
 let Font = loadFont('assets/ARCADECLASSIC.TTF');
 let startButton = new Button(150, 350, 260, 70);
 let restartButton = new Button(150, 350, 260, 70);
-let care = new Care(foodScreen, sleepZ, heart, textBox);
+let care = new Care(foodScreen, nom, sleepZ, heart, textBox);
 let loop = 0;
 let state = "start";
+let x;
+let y;
+let emote = {
+   a: 10,
+};
 
 //Food
 let foodButton = new Button(420, 10, 130, 50);
 let pizzaButton = new Button(100, 425, 80, 80);
 let cupcakeButton = new Button(220, 425, 80, 80);
 let sushiButton = new Button(380, 425, 80, 80);
-let nom = loadImage('assets/nom.png');
 let feedingTime = 0;
 let eating = false;
 let full = false;
@@ -50,7 +55,6 @@ let meloButton = new Button(360, 120, 180, 210);
 let chosenOne;
 let name;
 let namePreview;
-
 
 function mouseClicked() {
    //Start screen
@@ -133,6 +137,7 @@ function mouseClicked() {
 
 
 
+
 function draw() {
    clear();
    image(Background1, 0, 0);
@@ -140,14 +145,18 @@ function draw() {
    //Start screen
    if (state == "start"){
       image(startPic, 150, 350);
+      textAlign(CENTER);
       textSize(30);
-      text("START", 230, 395);
+      text("Choose your favorite Sanrio character and take good care of your new friend!", 135, 150, 300);
+      textSize(30);
+      text("START", 280, 395);
    }
    else if (state == "characterChoice") {
 
       //Character choice
+      textAlign(CENTER);
       textSize(30);
-     text("Choose your character!", 130, 60);
+      text("Choose your character!", 280, 60);
 
      //Name when hovering
      if (kuroButton.hitTest()) {
@@ -160,7 +169,7 @@ function draw() {
       namePreview = "MyMelody";
       }
       textSize(20);
-      text(namePreview, 230, 90);
+      text(namePreview, 280, 90);
       image(KuroPic, 10, 120);
       image(CinnaPic, 130, 370);
       image(MeloPic, 360, 120);
@@ -168,13 +177,31 @@ function draw() {
 
    //Tamagotchi
    else if (state == "game") {
-   image(chosenOne, 180, 180);
+
+   if (name == "Kuromi") {
+      x = 180;
+      y = 180;
+   }
+
+   if (name == "MyMelody") {
+      x = 190;
+      y = 180;
+   }
+   
+   if (name == "Cinnamoroll") {
+      x = 140;
+      y = 230;
+   }
+
+   image(chosenOne, x, y);
    image(Buttons, 420, 10);
+   textAlign(LEFT),
    care.stats();
    textSize(14);
-   text("FOOD", 465, 40);
-   text("SLEEP", 463, 95);
-   text("PAT", 470, 150);
+   textAlign(CENTER);
+   text("FOOD", 485, 40);
+   text("SLEEP", 485, 95);
+   text("PAT", 485, 150);
 
 
    //Decrease of parameters
@@ -209,7 +236,7 @@ function draw() {
    }
 
    if(feedingTime >= 1){
-      image(nom, 100, 100);
+      care.nom();
    }
 
    if (care.foodValue == true) {
@@ -253,6 +280,7 @@ function draw() {
 
    if (fullTextBox >= 1) {
       care.textBox();
+      textAlign(LEFT);
       text(name + " is not hungry anymore!", 80, 450);
    }
 
@@ -267,6 +295,7 @@ function draw() {
 
    if (hyped == true) {
       care.textBox();
+      textAlign(LEFT);
       text(name + " is too hyped to sleep!", 80, 450);
    }
 
@@ -281,6 +310,7 @@ function draw() {
 
    if (annoyed == true) {
       care.textBox();
+      textAlign(LEFT);
       text(name + "'s social battery is empty! They need some space.", 80, 450);
    }
 
@@ -290,20 +320,34 @@ function draw() {
    }
 
 }
-
+   //End screen
    else if (state == "failed") {
-      textSize(50);
+      animation();
+      textSize(emote.a);
       fill(255, 0, 0);
-      text("FAILED", 195, 150);
+      textAlign(CENTER);
+      text("FAILED", 280, 150);
       fill(0, 0, 0);
       textSize(25);
-      text("Oh no! " + name + " didn't feel well.", 110, 250);
-      text("You should take better care of them next time.", 30, 300);
+      text("Oh no! " + name + " didn't feel well :( You should take better care of them next time.", 85, 220, 390);
       image(startPic, 150, 350);
       textSize(30);
-      text("RESTART", 210, 395);
+      text("RESTART", 280, 395);
    }
+}
+
+//GSAP animation
+function animation() {
+   gsap.to(emote, {
+      duration: 5,
+      ease: "easeOut",
+      a: 80,
+      onComplete: () => {
+       animation();
+      },
+   });
 }
 
 window.draw = draw;
 window.mouseClicked = mouseClicked;
+window.animation = animation;
